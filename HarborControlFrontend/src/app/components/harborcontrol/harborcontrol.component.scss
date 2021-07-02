@@ -1,0 +1,18 @@
+.generateBoat{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+.generateBoat strong{
+    width: 100%;
+    display: inline-block;
+}
+.generateBoat input{
+    width: calc(100% - 150px);
+}
+.windspeed{
+    align-items: center;
+}
+.generateBoat button{
+    height: 38px;
+}

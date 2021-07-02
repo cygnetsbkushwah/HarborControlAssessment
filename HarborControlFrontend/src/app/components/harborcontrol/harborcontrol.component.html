@@ -1,0 +1,92 @@
+<div class="wrapper">
+    <div class="card col-lg-12 mt-5">
+        <div class="card-body">
+            <div class="row windspeed">
+                <!-- Display wind speed information -->
+                <div class="col-5">
+                    <span> <strong> Current Wind Speed : </strong> {{ windSpeed }} kmph </span>
+                    <button class="btn btn-info ml-2" (click)="windSpeeRrefresh()">
+                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                        Refresh {{autoRefWindTimeLeft + 's'}}
+                    </button>
+                </div>
+                <!-- Random boats generate -->
+                <div class="col-7">
+                    <div class="generateBoat">
+                        <strong> <span>Enter the number of boats to generate</span></strong>
+                        <input type="text" class="form-control mt-2" [(ngModel)]="boatCount">
+                        <button class="btn btn-success ms-2" (click)="generateBoat()">
+                            <i class="fa fa-ship" aria-hidden="true"></i>
+                            Generate
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Display boats status information -->
+            <div class="row col-lg-12">
+                <div>
+                    <div *ngIf="boatList.length == 0">
+                        <div class="alert alert-primary mt-3" role="alert">
+                            There are no boats on perimeter.
+                        </div>
+                    </div>
+                    <div *ngIf="boatList.length > 0">
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <strong> Boat waiting summary</strong>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Speed Boat</th>
+                                            <th scope="col">Sail Boat</th>
+                                            <th scope="col">Cargo Ship</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{speedBoatcount}}</td>
+                                            <td>{{sailBoatcount}}</td>
+                                            <td>{{cargoBoatcount}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Boats list table -->
+            <div class="row col-lg-12 mt-3">
+                <div class="col-lg-12" *ngIf="boatList.length > 0">
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <strong>Boat List</strong>
+                        </div>
+                        <div class="card-body">
+                            <table mdbTable class="table col-lg-12 table-striped" striped="true">
+                                <thead class="black white-text">
+                                    <tr>
+                                        <th scope="col col-lg-3">Boat Type</th>
+                                        <th scope="col col-lg-3">Boat Speed (KM/h)</th>
+                                        <th scope="col col-lg-2">Actual(Minutes) = (Seconds X 60)</th>
+                                        <th scope="col col-lg-4 ">Boat Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr mdbTableCol *ngFor="let boat of boatList">
+                                        <th scope="row">{{getBoatType(boat.boatType)}}</th>
+                                        <td>{{boat.boatSpeed}}</td>
+                                        <td>{{boat.duration}}</td>
+                                        <td>{{getBoatStatus(boat.boatStatus)}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
